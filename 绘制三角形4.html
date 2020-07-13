@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        // 填充三角型
+        ctx.beginPath();
+        ctx.moveTo(50, 50);
+        ctx.lineTo(150, 50);
+        ctx.lineTo(50, 150);
+        ctx.fill();
+        //描边三角形
+        ctx.beginPath();
+        ctx.lineTo(160, 60);
+        ctx.lineTo(60, 160);
+        ctx.lineTo(160, 160);
+        ctx.closePath();
+        ctx.stroke();
+      }
+    }
+  </script>
+</html>

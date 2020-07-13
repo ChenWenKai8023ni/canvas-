@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+        color: rgba(rgb(131, 37, 37), green, blue, 1);
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //径向渐变
+        //参数1: 圆的x轴起点
+        //参数2: 圆的y轴起点
+        //参数3: 圆的半径
+        //参数4:终点x2
+        //参数5:终点y2
+        //参数6: 半径
+
+        let redgrad = ctx.createRadialGradient(45, 45, 10, 50, 50, 30);
+        redgrad.addColorStop(0, "#a7d30c");
+        redgrad.addColorStop(0.9, "#019f62");
+        redgrad.addColorStop(1, "rgba(1,159,98,0)");
+        //画图形
+        ctx.fillStyle = redgrad;
+        ctx.fillRect(0, 0, 150, 150);
+
+        let redgrad2 = ctx.createRadialGradient(105, 105, 20, 112, 120, 50);
+        redgrad2.addColorStop(0, "#ff5f98");
+        redgrad2.addColorStop(0.9, "#ff0188");
+        redgrad2.addColorStop(1, "rgba(255,1,136,0)");
+        ctx.fillStyle = redgrad2;
+        ctx.fillRect(0, 0, 150, 150);
+      }
+    }
+  </script>
+</html>

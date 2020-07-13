@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+        color: rgba(rgb(131, 37, 37), green, blue, 1);
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        let img = new Image();
+        img.src = "https://s1.ax1x.com/2020/07/10/UMVZcV.jpg";
+        img.onload = function () {
+          ctx.beginPath();
+          ctx.arc(550, 250, 250, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.clip(); //将当前正在构建的路径转换为当前的裁剪路径。
+          ctx.drawImage(this, 0, 0);
+        };
+      }
+    }
+  </script>
+</html>

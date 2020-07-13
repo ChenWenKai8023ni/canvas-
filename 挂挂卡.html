@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        position: absolute;
+        left: 0;
+      }
+      img {
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <img src="https://s1.ax1x.com/2020/07/10/UMVZcV.jpg" alt="" />
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //盖住图片
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.lineWidth = 80;
+        ctx.lineCap = "round";
+        canvas.onmousedown = function (e) {
+        //   ctx.strokeStyle = "rgba(0, 0, 0, 0)";
+          let ev = e || window.event;
+          let x = ev.clientX;
+          let y = ev.clientY;
+          ctx.moveTo(x, y);
+          canvas.onmousemove = function (event) {
+            let ent = event || window.event;
+            let x = ent.clientX;
+            let y = ent.clientY;
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          };
+          canvas.onmouseup = function () {
+            canvas.onmousemove = "";
+          };
+        };
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+        color: rgba(rgb(131, 37, 37), green, blue, 1);
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //font-weight font-style font-size font-family
+        let lingrad = ctx.createLinearGradient(0, 0, 500, 300);
+        lingrad.addColorStop(0, "red");
+        lingrad.addColorStop(0.3, "red");
+        lingrad.addColorStop(0.6, "green");
+        lingrad.addColorStop(1, "blue");
+        ctx.fillStyle = lingrad;
+        ctx.shadowColor = "orange"; //阴影颜色
+        ctx.shadowBlur = 10; //阴影模糊范围
+        ctx.shadowOffsetX = 10; //阴影x轴偏移量
+        ctx.shadowOffsetY = 10; //阴影y轴偏移量
+        ctx.font = "bold  100px 微软雅黑";
+
+        ctx.fillText("绘制文字", 100, 200);
+      }
+    }
+  </script>
+</html>

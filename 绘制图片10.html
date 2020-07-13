@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+        color: rgba(rgb(131, 37, 37), green, blue, 1);
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //创建imgd对象
+        let img = new Image();
+        img.src = "https://s1.ax1x.com/2020/06/25/N0Uro8.png";
+        img.onload = function () {
+          let ptrn = ctx.createPattern(img, "repeat");
+          ctx.fillStyle = ptrn;
+          ctx.fillRect(0, 0, 800, 600);
+        };
+        //在绘制图片时,一定要确保图片被加载完成
+      }
+    }
+  </script>
+</html>

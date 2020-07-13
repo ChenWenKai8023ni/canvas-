@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 3; j++) {
+            ctx.beginPath();
+            let x = 25 + j * 100;
+            let y = 25 + i * 100;
+            let radius = 20;
+            let start = 0;
+            let end = Math.PI + (Math.PI * j) / 2;
+            let boo = i % 2 == 0 ? false : true;
+            ctx.arc(x, y, radius, start, end, boo);
+            if (i < 2) {
+              ctx.stroke();
+            } else {
+              ctx.fill();
+            }
+          }
+        }
+      }
+    }
+  </script>
+</html>

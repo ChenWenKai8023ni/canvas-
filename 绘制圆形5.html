@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //圆的组成:圆心(x,y)半径,开始角度,结束角度,是否顺逆时针
+        ctx.strokeStyle = "orange";
+        //定义路径宽度
+        ctx.lineWidth = 10;
+        //默认false顺时针
+        ctx.arc(400, 300, 200, 0, Math.PI * 2);
+        ctx.arc(400, 300, 150, 0, Math.PI * 1.5);
+        ctx.arc(400, 300, 100, 0, Math.PI * 1);
+        ctx.arc(400, 300, 50, 0, Math.PI * 0.5);
+        ctx.stroke();
+      }
+    }
+  </script>
+</html>

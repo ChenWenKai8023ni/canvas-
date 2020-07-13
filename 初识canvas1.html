@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //填充一个矩形 从x轴10y轴出生成宽350高300
+        ctx.fillStyle = "rgba(200,0,0,1)";
+        ctx.fillRect(10, 10, 350, 300);
+        ctx.fillStyle = "rgba(0,0,2000,.4)";
+        ctx.fillRect(30, 30, 350, 300);
+        //描边矩形
+        ctx.strokeStyle = "rgba(0,0,200,.5)";
+        ctx.strokeRect(20, 20, 350, 300);
+        ctx.strokeStyle = "rgba(200,0,0,1)";
+        ctx.strokeRect(40, 40, 350, 300);
+      }
+    }
+  </script>
+</html>

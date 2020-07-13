@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        padding-top: 20px;
+      }
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+
+  <body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+      你的浏览器不支持canvas
+    </canvas>
+  </body>
+  <script>
+    function draw() {
+      let canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        //定义一个2d的渲染上下文才能绘制
+        let ctx = canvas.getContext("2d");
+        //图形基本元素都是路径
+        // 首先，你需要创建路径起始点。
+        // 然后你使用画图命令去画出路径。
+        // 之后你把路径封闭。
+        // 一旦路径生成，你就能通过描边或填充路径区域来渲染图形。
+        ctx.beginPath();
+        ctx.moveTo(75, 50);
+        ctx.lineTo(100, 75);
+        ctx.lineTo(100, 25);
+        ctx.closePath();
+        //使用描边
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(175, 150);
+        ctx.lineTo(200, 175);
+        ctx.lineTo(200, 125);
+        //使用填充
+        ctx.fill();
+      }
+    }
+  </script>
+</html>
