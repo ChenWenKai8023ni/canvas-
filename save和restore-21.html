@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: solid 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        执行save将当前状态存放在"栈中"<br>
+        执行restore将save保存的状态从'栈中'提取出来使用<br>
+        提取规则 <br>
+        就像洗衣机里的衣服,最先放进去的,也是最后拿出来的
+
+    </p>
+    <canvas width="300" height="300">
+
+    </canvas>
+</body>
+<script>
+    /** @type {HTMLCanvasElement} */
+    let canvas = document.querySelector("canvas");
+    if (canvas.getContext) {
+        let ctx = canvas.getContext("2d");
+        // 使用 save() 方法保存默认的状态，使用 restore() 进行恢复
+
+        //保存到栈中的绘制状态
+        //当前的变换矩阵。
+        //当前的剪切区域。
+        //当前的虚线列表.
+        //每save一次就会将当前状态放在"栈中"
+        //save了四次存了四次
+        //每restore一次就会从"栈中"获取
+        ctx.save(); // 保存状态
+        ctx.fillStyle = "green";
+        ctx.save();
+        ctx.fillStyle = "red";
+        ctx.save();
+        ctx.fillStyle = "blue";
+        ctx.save();
+        ctx.restore()
+        ctx.fillRect(0, 0, 50, 50)
+        ctx.restore()
+        ctx.fillRect(60, 0, 50, 50)
+        ctx.restore()
+        ctx.fillRect(120, 0, 50, 50)
+        ctx.restore()
+        ctx.fillRect(180, 0, 50, 50)
+    }
+</script>
+
+</html>

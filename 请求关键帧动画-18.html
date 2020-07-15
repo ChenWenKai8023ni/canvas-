@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        canvas {
+            box-shadow: 0px 0px 3px red;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <canvas width="800" height="300"></canvas>
+
+
+</body>
+<script>
+    function draw() {
+        /** @type {HTMLCanvasElement} */
+        let canvas = document.querySelector("canvas");
+        if (canvas.getContext) {
+            let ctx = canvas.getContext("2d");
+
+            //animate 直线运动
+
+            ctx.beginPath(); //创建路径
+            //canvas动画原理
+            //1:绘制图像
+            //2:清除图像
+            //3"更新位置
+            //4:绘制图像
+            //5: 2 3 4 2 3 4
+
+            //绘制图像
+            let x = 0;
+            let y = 0;
+            let width = 100;
+            let height = 100
+            ctx.fillStyle = "green";
+            ctx.lineWidtd = 10;
+            ctx.fillRect(x, y, width, height)
+            //定义速度
+            let speedX = 2;
+            let speedY = 2;
+
+            function move() {
+                //清除图像
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                //更新位置
+                x = x + speedX;
+                y = y + speedY;
+                if (x > canvas.width - width) {
+                    x = canvas.width - width
+                    speedX *= -1
+                } else if (x < 0) {
+                    speedX *= -1
+                }
+                if (y > canvas.height - height) {
+                    y = canvas.height - height
+                    speedY *= -1
+                } else if (y < 0) {
+                    speedY *= -1
+                }
+                // 绘制图像
+                ctx.fillRect(x, y, width, height)
+                //告诉浏览器——你希望执行一个动画
+                //并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
+                //该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+                window.requestAnimationFrame(move)
+            }
+            move()
+        }
+    }
+</script>
+
+</html>

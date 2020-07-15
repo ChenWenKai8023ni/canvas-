@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        canvas {
+            box-shadow: 0px 0px 3px red;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+    <canvas width="300" height="300"></canvas>
+
+</body>
+<script>
+    function draw() {
+        /** @type {HTMLCanvasElement} */
+        let canvas = document.querySelectorAll("canvas");
+        let ctx = {};
+        let globalComp = [
+            "lighter",
+            "copy",
+            "xor",
+            "multiply",
+            "screen",
+            "overlay",
+            "darken",
+            "lighten",
+            "color-dodge",
+            "color-burn",
+            "hard-light",
+            "soft-light"
+        ];
+        //图像混合
+        for (let i = 0; i < canvas.length; i++) {
+            ctx[i] = canvas[i].getContext("2d");
+            ctx[i].fillStyle = "red";
+            ctx[i].fillRect(50, 50, 100, 100);
+            // 默认类型:source-over 新图形后盖住目标图形 (2者都显示)
+            //source-in    新图像绘制与目标图像重叠区域(显示与目标图像重叠区域)
+            //source-out   新图像绘制与目标图像不重叠区域 (显示新图像和目标图像不重叠区域)
+            //source-atop  新图像绘制与目标图像重叠区域 (显示目标区域和与目标图像重叠区域)
+            ctx[i].globalCompositeOperation = globalComp[i];
+            ctx[i].fillStyle = "green";
+            ctx[i].arc(150, 150, 50, 0, Math.PI * 2);
+            ctx[i].fill();
+
+        }
+    }
+</script>
+
+</html>

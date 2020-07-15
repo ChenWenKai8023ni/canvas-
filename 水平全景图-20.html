@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="980" height="533"></canvas>
+</body>
+<script>
+    /** @type {HTMLCanvasElement} */
+    let canvas = document.querySelector("canvas");
+    if (canvas.getContext) {
+        let ctx = canvas.getContext("2d");
+        let x = 0;
+        //水平背景移动
+        function background() {
+            //保存到栈中的绘制状态
+            //当前的变换矩阵。
+            //当前的剪切区域。
+            //当前的虚线列表.
+            ctx.save();
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            //translate() 方法, 将 canvas 按原始 x点的水平方向、原始的 y点垂直方向进行平移变换
+            ctx.translate(-x, 0);
+            ctx.drawImage(bgimg, 0, 0)
+            ctx.drawImage(bgimg, canvas.width, 0)
+            //判断x偏移量
+            x++;
+            if (x >= canvas.width) {
+                x = 0
+            }
+            ctx.restore()
+            window.requestAnimationFrame(background)
+        }
+        let bgimg = new Image()
+        bgimg.src = "./bg.jpg";
+        bgimg.onload = function () {
+            background()
+        }
+    }
+</script>
+
+</html>
