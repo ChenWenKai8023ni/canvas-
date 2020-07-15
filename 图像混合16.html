@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        canvas {
+            display: block;
+            box-shadow: 0px 0px 3px red;
+        }
+
+        body {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <div class="left">
+        <span>source-over<br />
+            目标图像与新图像都绘制<br />
+            新图像在目标图像之上
+        </span>
+        <canvas id="canvas1" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>source-in<br />
+            绘制新图像与目标图像重叠区域<br />
+            显示新图像的重叠图像
+        </span>
+        <canvas id="canvas2" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>
+            source-out<br />
+            绘制新图像与目标图像不重叠区域<br />
+            显示新图像的不重叠图像
+        </span>
+        <canvas id="canvas3" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>
+            source-atop <br />
+            绘制新图像和目标图像重叠区域和目标图像<br />
+            新图像在上
+        </span>
+        <canvas id="canvas4" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+    </div>
+    <div class="right">
+        <span>
+            destination-over
+            <br />
+            目标图像与新图像都绘制
+            <br />
+            新图像在目标图像之下
+        </span>
+        <canvas id="canvas1" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>destination-in
+            <br />
+            绘制目标图像与新图像重叠区域
+            <br />
+            显示目标图像的重叠图像</span>
+        <canvas id="canvas2" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>
+            destination-out
+            <br />
+            绘制目标图像与新图像不重叠区域
+            <br />
+            显示目标图像的不重叠图像
+        </span>
+        <canvas id="canvas3" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+        <span>
+            destination-atop
+            <br />
+            绘制目标图像与新图像重叠区域和新图像
+            <br />
+            新图像在下
+        </span>
+        <canvas id="canvas4" width="300" height="300">
+            你的浏览器不支持canvas
+        </canvas>
+    </div>
+</body>
+<script>
+    function draw() {
+        /** @type {HTMLCanvasElement} */
+        //   let canvas1 = document.getElementById("canvas1");
+        let canvas = document.querySelectorAll("canvas");
+        let ctx = {};
+        let globalComp = [
+            "source-over",
+            "source-in",
+            "source-out",
+            "source-atop",
+            "destination-over",
+            "destination-in",
+            "destination-out",
+            "destination-atop",
+        ];
+        //图像混合
+        for (let i = 0; i < canvas.length; i++) {
+            if (i < 4) {
+                ctx[i] = canvas[i].getContext("2d");
+                ctx[i].fillStyle = "red";
+                ctx[i].fillRect(50, 50, 100, 100);
+
+                // 默认类型:source-over 新图形后盖住目标图形 (2者都显示)
+                //source-in    新图像绘制与目标图像重叠区域(显示与目标图像重叠区域)
+                //source-out   新图像绘制与目标图像不重叠区域 (显示新图像和目标图像不重叠区域)
+                //source-atop  新图像绘制与目标图像重叠区域 (显示目标区域和与目标图像重叠区域)
+                ctx[i].globalCompositeOperation = globalComp[i];
+                ctx[i].fillStyle = "green";
+                ctx[i].arc(150, 150, 50, 0, Math.PI * 2);
+                ctx[i].fill();
+            } else {
+                ctx[i] = canvas[i].getContext("2d");
+                ctx[i].fillStyle = "red";
+                ctx[i].fillRect(50, 50, 100, 100);
+                ctx[i].globalCompositeOperation = globalComp[i];
+                ctx[i].fillStyle = "green";
+                ctx[i].arc(150, 150, 50, 0, Math.PI * 2);
+                ctx[i].fill();
+            }
+        }
+    }
+</script>
+
+</html>
